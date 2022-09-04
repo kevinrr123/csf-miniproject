@@ -28,9 +28,11 @@ public class RedisConfig {
   @Value("${spring.redis.port}")
   private Optional<Integer> redisPort;
 
-  private String redisPassword = System.getenv("REDIS_PASSWORD");
+  @Value("${spring.redis.password}")
+  private String redisPassword;
+  //private String redisPassword = System.getenv("REDIS_PASSWORD");
 
-  @Bean("repository")
+  @Bean
   public RedisTemplate<String, Object> redisTemplate(){
     final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
     config.setHostName(redisHost);
