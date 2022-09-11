@@ -1,12 +1,13 @@
 package vttp2022.com.ssfminiproject.model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import jakarta.json.JsonObject;
 
-public class Recipe {
-        private String id;
+public class Recipe implements Serializable{
+        public String id;
         private String name;
         private String category;
         private String area;
@@ -14,6 +15,8 @@ public class Recipe {
         private String imageUrl;
         private List<String> ingredient;
         private List<String> measure;
+
+        private static final long serialVersionUID = 1L;
 
         public List<String> getMeasure() {
             return measure;

@@ -112,14 +112,16 @@ public class RecipeService{
     public String saveUser(String username, String password){
         username = username + "user";
         String saved = redis.save(username, password);
-
-        return saved;
-        
+        return saved;      
     }
 
     public String getUser(String key){
         String value = redis.get(key);
         return value;
+    }
+
+    public Boolean saveRecipe(String name, String id) {
+        return redis.saveReci(name, id);
     }
 
 }

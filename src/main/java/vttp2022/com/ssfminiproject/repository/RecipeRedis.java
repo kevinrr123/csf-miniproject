@@ -1,46 +1,21 @@
 package vttp2022.com.ssfminiproject.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Repository;
 
-
-import vttp2022.com.ssfminiproject.model.User;
-
 @Repository
 public class RecipeRedis implements RecipeRepo{
 
-    private User user;
-    private String username;
-
     @Autowired
     private RedisTemplate<String, Object> template;
-    
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public RecipeRedis() {
-
-    }
-
-    public RecipeRedis(String username) {
-        this.username = username; 
-    }
+    @Autowired
+    private RedisTemplate<String, String> template2;
 
     @Override
     public String save(String key, String value){
@@ -67,25 +42,23 @@ public class RecipeRedis implements RecipeRepo{
         return value;
     }
 
+    @Override
+    public Boolean saveReci(String key2,String value2){
+        ListOperations<String, String> listOps = template2.opsForList();
+        List<String> ValueList = SavedList(key2);
 
-    // @Override
-    // public User getUser(String username) {
-    //     User result = new User(username);
+        if (!ValueList.contains(value2)) {
+            listOps.rightPush(key2, value2);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    //     Set<String> keys = template.keys("*");
-    //     if (keys.contains(username)) {
-    //         result = (User) template.opsForValue().get(username);
-    //     }
-
-    //     return result;
-    // }
-
-    // public Boolean addRecipe(Recipe recipe) {
-    //     ListOperations<String, Object> listOps = template.opsForList();
-    //     User user = getUser(username);
-    //     listOps.rightPush(username, recipe);
-    //     return true;
-    // }
+    public List<String> SavedList(String name) {
+        ListOperations<String, String> listOps2 = template2.opsForList();
+        return listOps2.range(name, 0, listOps2.size(name) + 1);
+    }
 
 }
 

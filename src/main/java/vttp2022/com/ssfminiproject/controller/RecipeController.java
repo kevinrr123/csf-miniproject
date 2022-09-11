@@ -1,6 +1,7 @@
 package vttp2022.com.ssfminiproject.controller;
 
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import vttp2022.com.ssfminiproject.model.Recipe;
-import vttp2022.com.ssfminiproject.model.User;
 import vttp2022.com.ssfminiproject.repository.RecipeRedis;
 import vttp2022.com.ssfminiproject.service.RecipeService;
 
@@ -32,8 +32,7 @@ public class RecipeController {
     RecipeService recipeSvc;
 
     @GetMapping(path="/")
-    public String getIndex() {        
-        
+    public String getIndex() {                
         return "index";
     }
 
@@ -43,15 +42,12 @@ public class RecipeController {
         @RequestParam(name = "password") String password,
         HttpSession sess, Model model)
     {   
-        User u = new User();
         if(recipeSvc.getUser(username+"user").equals(password)){
-            sess.setAttribute("name", username.toUpperCase());
-            model.addAttribute("name", username);
-            model.addAttribute("user", u);
+            sess.setAttribute("name", username);
+            model.addAttribute("name", username.toUpperCase());
             return "home";
         }
-        else
-        
+        else        
         return "error";
     }
 
@@ -59,17 +55,6 @@ public class RecipeController {
     public String getSignUpPage(){
         return "signUp";
     }
-
-
-    // @PostMapping(path = "/", consumes="application/x-www-form-urlencoded", produces="text/html")
-    // public String userPage(@RequestBody MultiValueMap<String, String> form, HttpSession sess, Model model) {
-    //     User u = new User();
-    //     String username = form.getFirst("name");
-    //     sess.setAttribute("name", username);
-    //     model.addAttribute("name", username);
-    //     model.addAttribute("user", u);
-    //     return "home";
-    // }
 
     @GetMapping(path="/SearchRecipe")
     public String getRecipebyName(@RequestParam String mealName, HttpSession sess, Model model){
@@ -80,10 +65,21 @@ public class RecipeController {
         if (recipeList.isEmpty()) {
             return "error";
         } else {
-            model.addAttribute("name", username);
+            model.addAttribute("name", username.toUpperCase());
             model.addAttribute("recipes", recipeList);
             //model.addAttribute("user", u);
         }
+        return "home";
+    }
+
+    @GetMapping(path = "/home")
+    public String getHome(HttpSession sess,Model model){
+
+        if (sess.getAttribute("name") == null) {
+            return "redirect:/";
+        }
+        String username = sess.getAttribute("name").toString();
+        model.addAttribute("name", username.toUpperCase());
         return "home";
     }
 
@@ -104,8 +100,7 @@ public class RecipeController {
         
         if (sess.getAttribute("name") == null) {
             return "redirect:/";
-        }
-        
+        }    
         Optional<Recipe> opt = recipeSvc.getRandomRecipe();
 
         if (opt.isEmpty()) {
@@ -117,10 +112,29 @@ public class RecipeController {
         return "recipeDetails";
     }
 
+    @GetMapping(path = "/favourites")
+    public String getFavourites( HttpSession sess, Model model) {
+
+        if (sess.getAttribute("name") == null) {
+            return "redirect:/";
+        }  
+
+        String username = sess.getAttribute("name").toString();
+        List<String> recipeList = redis.SavedList(username);
+        List<Recipe> listOfRecipes = new LinkedList<>();
+        for (String id : recipeList) {
+            Recipe recipe = recipeSvc.getById(id);
+            listOfRecipes.add(recipe);
+        }
+        model.addAttribute("name", username.toUpperCase());    
+        model.addAttribute("recipes", listOfRecipes);
+        return "favs";
+    }
+    
     @GetMapping(path="/logout")
     public String getLogout(HttpSession sess) {
         sess.invalidate();
         return "redirect:/";
-    }
+    }   
 
 }
