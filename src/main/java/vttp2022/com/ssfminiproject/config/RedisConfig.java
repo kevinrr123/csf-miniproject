@@ -30,7 +30,7 @@ public class RedisConfig {
 
   // @Value("${spring.redis.password}")
   // private String redisPassword;
-  private String redisPassword = System.getenv("REDIS_PASSWORD");
+ private String redisPassword = System.getenv("REDIS_PASSWORD");
 
   @Bean
   public RedisTemplate<String, Object> redisTemplate(){
