@@ -124,4 +124,8 @@ public class RecipeService{
         return redis.saveReci(name, id);
     }
 
+    public void delRecipe(String key, String value) {
+        redis.delete(key, value);
+    }
+
 }

@@ -21,12 +21,15 @@ public class RecipeRedis implements RecipeRepo{
     public String save(String key, String value){
 
         ValueOperations<String, Object> ops = template.opsForValue();
+        if(!template.hasKey(key)){
         ops.set(key, value);
-        
         ValueOperations<String, Object> ops2 = template.opsForValue();
         Object obj = ops2.get(key);
 
         return obj.toString();
+        }
+        else
+            return null;       
     }
 
     @Override
@@ -58,6 +61,12 @@ public class RecipeRedis implements RecipeRepo{
     public List<String> SavedList(String name) {
         ListOperations<String, String> listOps2 = template2.opsForList();
         return listOps2.range(name, 0, listOps2.size(name) + 1);
+    }
+
+    @Override
+    public void delete(String key, String value) {
+        ListOperations<String, String> listOps2 = template2.opsForList();
+        listOps2.remove(key, 0, value);    
     }
 
 }

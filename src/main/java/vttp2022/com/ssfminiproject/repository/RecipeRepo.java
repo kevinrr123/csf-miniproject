@@ -6,7 +6,9 @@ public interface RecipeRepo {
 
     public String get(String key);
     
-    public Boolean saveReci(String key2, String value);
+    public Boolean saveReci(String key, String value);
+
+    public void delete(String key, String value);
     
 }
 

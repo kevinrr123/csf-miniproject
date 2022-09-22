@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js" 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0/js/bootstrap.min.js" 
     integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA==" 
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
@@ -22,7 +22,7 @@
       rel="stylesheet"
     />
 </head>
-<nav class="navbar navbar-expand-lg" style="background-color: #100950; font-weight: bolder; color: beige;">
+<nav class="navbar navbar-expand-lg nav-fill" style="background-color: #0f075e; font-weight: bolder; color: beige;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
         <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
           <li class="nav-item mx-2">
             <a class="nav-link" href="/RandomRecipe">Random Recipe</a>
           </li>
-          <li class="nav-item mx-2">
+          <li class="nav-item mx-2" style="padding-left: 330px;">
             <form method="GET" action="/SearchRecipe">
               <div class="input-group">
                   <input type="text" class="form-control border border-dark" name="mealName" placeholder="Find a Recipe (e.g. cake)" maxlength="100">
@@ -43,7 +43,7 @@
               </div>
            </form>
           </li>
-          <li class="nav-item mx-2">
+          <li class="nav-item mx-2" style="padding-left: 540px;">
             <a class="nav-link" href="/logout">Log out</a>
           </li>
         </ul>

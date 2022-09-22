@@ -19,16 +19,19 @@
 <body>
     <div data-th-replace="nav.html"></div>
     </br>
-    <h1 style="padding-left:25px">Favourite Recipes of <span th:text="${name}"/>!</h1>
+    <h1 style="padding-left:25px">Here are your favourite recipes, <span th:text="${name}"/></h1>
     </br>
     <div class="container d-flex justify-content-center" data-th-if="${recipes}">
         <div class="row mx-auto">
             <center><h2>Recipes: <span data-th-text="${recipes.size}" style="font-weight: bolder;"></span></h2></center>
             <div class="col-sm-3" data-th-each="r : ${recipes}">
                 <a class="btn btn-link" data-th-href="|/getById/${r.id}|">
-                    <img data-th-src="${r.imageUrl}" class="img-fluid img-thumbnail" style="width: 80%;">
+                    <img data-th-src="${r.imageUrl}" class=" img-thumbnail" style="width: 80%;">
                 </a>
                 <p class="text-center" style="font-weight: bold;" data-th-text="${r.name}"></p>
+                <form method="POST" data-th-action="|/rest/deleteFav/${r.id}|">
+                    <center><button type="submit" class="btn btn-danger btn-sm" title="Remove"><i class="fa fa-trash" style="font-size:15px;"></i></button></center>
+                </form>
             </div>
         </div>
     </div>

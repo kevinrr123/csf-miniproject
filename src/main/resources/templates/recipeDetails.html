@@ -48,9 +48,9 @@
                 <p>Category: <span data-th-text="${recipe.category}"></span></p>        
                 <p>Type of Cuisine: <span data-th-text="${recipe.area}"></span></p>
                 <p>Source: <a data-th-href="${recipe.sourceUrl}" target="_blank">Click Here</a></p> 
-                <form method="post" action="/rest/favRecipes" class="input-group mb-3">
+                <form method="POST" action="/rest/favRecipes" class="input-group mb-3">
                     <input type="hidden" name="id" data-th-value="${recipe.id}">
-                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add to Favourites</button>
+                    <button class="btn btn-secondary" type="submit" id="button-addon2">Add to Favourites</button>
                 </form>
             </div>
         </div>
