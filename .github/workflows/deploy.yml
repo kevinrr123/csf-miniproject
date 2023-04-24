@@ -25,14 +25,14 @@ jobs:
         run: npm run build:prod
       - name: Copy Angular files to Spring Boot static directory
         run: |
-          cp ./dist/*  ../src/main/resources/static
+          cp ./dist/*  ../backend/src/main/resources/static
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: ./
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
       - uses: actions/checkout@v3
       # - name: Use Node
