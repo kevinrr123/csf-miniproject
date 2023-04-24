@@ -11,7 +11,9 @@ jobs:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Use Node
         uses: actions/setup-node@v3
         with:
@@ -21,9 +23,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
       - name: Build Angular files
         run: npm run build:prod
-      - name: Copy Angular files to Spring Boot static directory
+
+      - name: Copy Angular files to Spring Boot
         run: |
           cp -r ./dist/*  ../backend/src/main/resources/static
 
@@ -34,13 +38,20 @@ jobs:
       run:
         working-directory: ./backend
     steps:
-      - uses: actions/checkout@v3
-      # - name: Use Node
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: 16
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install packages
+        run: yarn install --frozen-lockfile
+
       - name: Install Railway
-        run: npm i -g @railway/cli@2.1.0
+        run: npm i -g @railway/cli
+        
       - name: Deploy
         run: railway up
         env:

@@ -19,9 +19,9 @@
 			<div class="form-container sign-up-container">
 				<form [formGroup]="registerForm" (ngSubmit)="register()">
 					<h1>Sign Up</h1>&nbsp;
-					<input type="text" formControlName="username" placeholder="Username" required>
+					<input type="text" formControlName="username" placeholder="Username. Min 5 characters" required>
 					<input type="email" placeholder="Email" formControlName="email" required/>
-					<input type="password" placeholder="Password" formControlName="password" required/>
+					<input type="password" placeholder="Password. Min 5 characters" formControlName="password" required/>
 					&nbsp;
 					<button type="submit" [disabled]="registerForm.invalid">Sign Up</button>
 				</form>
