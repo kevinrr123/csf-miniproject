@@ -1,114 +1,65 @@
 package vttp2022.com.ssfminiproject.model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
 
+import jakarta.json.Json;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
 import jakarta.json.JsonObject;
 
 public class Recipe implements Serializable{
-        public String id;
-        private String name;
-        private String category;
-        private String area;
-        private String instructions;
-        private String imageUrl;
-        private List<String> ingredient;
-        private List<String> measure;
-
-        private static final long serialVersionUID = 1L;
-
-        public List<String> getMeasure() {
-            return measure;
-        }
-        public void setMeasure(List<String> measure) {
-            this.measure = measure;
-        }
-        public List<String> getIngredient() {
-            return ingredient;
-        }
-        public void setIngredient(List<String> ingredient) {
-            this.ingredient = ingredient;
-        }
-
-        private String sourceUrl;
+    public String id;
+    private String name;
+    private String category;
+    private String area;
+    private String instructions;
+    private String imageUrl;
+    private String sourceUrl;
     
-        public String getId() {
-            return id;
-        }
-        public void setId(String id) {
-            this.id = id;
-        }
-        public String getName() {
-            return name;
-        }
-        public void setName(String name) {
-            this.name = name;
-        }
-        public String getCategory() {
-            return category;
-        }
-        public void setCategory(String category) {
-            this.category = category;
-        }
-        public String getArea() {
-            return area;
-        }
-        public void setArea(String area) {
-            this.area = area;
-        }
-        public String getInstructions() {
-            return instructions;
-        }
-        public void setInstructions(String instructions) {
-            this.instructions = instructions;
-        }
-        public String getImageUrl() {
-            return imageUrl;
-        }
-        public void setImageUrl(String imageUrl) {
-            this.imageUrl = imageUrl;
-        }
+    private static final long serialVersionUID = 1L;
 
-        public String getSourceUrl() {
-            return sourceUrl;
-        }
-        public void setSourceUrl(String sourceUrl) {
-            this.sourceUrl = sourceUrl;
-        }
-    
-        public static Recipe create(JsonObject jObj) {
-            Recipe meal = new Recipe();
-            meal.id = jObj.getString("idMeal");
-            meal.name = jObj.getString("strMeal");
-            meal.category = jObj.getString("strCategory");
-            meal.area = jObj.getString("strArea");
-            meal.instructions = jObj.getString("strInstructions");
-            meal.imageUrl = jObj.getString("strMealThumb");    
-
-            List<String> ingredients = new LinkedList<>();
-            for (int i = 1; i <= 20; i++) {
-            if (jObj.getString("strIngredient%d".formatted(i)).isEmpty())
-                break;
-
-            String ingredientStr = jObj.getString("strIngredient%d".formatted(i)).replace(",", "");
-            ingredients.add(ingredientStr);
-            }
-            meal.ingredient = ingredients;
-
-            List<String> measures = new LinkedList<>();
-            for (int i = 1; i <= 20; i++) {
-            if (jObj.getString("strMeasure%d".formatted(i)).isEmpty())
-                break;
-           
-            String measureStr = jObj.getString("strMeasure%d".formatted(i)).replace(",", "");
-
-            measures.add(measureStr);
-            }
-            meal.measure = measures;
+    public JsonArrayBuilder create(JsonArray jArr) {
+        JsonArrayBuilder ab = Json.createArrayBuilder();
+        for (int i = 0; i < jArr.size(); i++) {
+            JsonObject jObj = jArr.getJsonObject(i);
+            id = jObj.getString("idMeal");
+            name = jObj.getString("strMeal");
+            category = jObj.getString("strCategory");
+            area = jObj.getString("strArea");
+            instructions = jObj.getString("strInstructions");
+            imageUrl = jObj.getString("strMealThumb");
             
-            meal.sourceUrl = jObj.getString("strSource");
-    
-            return meal;
+            JsonArrayBuilder ingAb = Json.createArrayBuilder();
+            for (int j = 1; j <= 20; j++) {
+                if (jObj.getString("strIngredient%d".formatted(j)).trim().isEmpty())
+                    break;
+
+                String ingredientStr = jObj.getString("strIngredient%d".formatted(j)).replace(",", "");
+                ingAb.add(ingredientStr);
+            }
+
+            JsonArrayBuilder meAb = Json.createArrayBuilder();
+            for (int x = 1; x <= 20; x++) {
+                if (jObj.getString("strMeasure%d".formatted(x)).trim().isEmpty())
+                    break;
+            
+                String measureStr = jObj.getString("strMeasure%d".formatted(x)).replace(",", "");    
+                meAb.add(measureStr);
+            }
+            sourceUrl = jObj.getString("strSource");
+
+            ab.add(Json.createObjectBuilder()
+            .add("id", id)
+            .add("name",name)
+            .add("category",category)
+            .add("area",area)
+            .add("instructions",instructions)
+            .add("imageUrl",imageUrl)
+            .add("ingredients", ingAb.build())
+            .add("measures", meAb.build())
+            .add("sourceUrl", sourceUrl));  
         }
+        
+        return ab;
+    }
 }

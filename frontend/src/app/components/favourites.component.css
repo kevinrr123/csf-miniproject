@@ -1,0 +1,29 @@
+.card {
+    width: 320px;
+    min-height: 450px;
+    display: inline-block;
+    vertical-align: top;
+    margin-right:15px;
+    margin-left:40px;
+    margin-top: 25px;
+    border-radius: 7px;
+    border-color: rgb(15, 14, 12);
+}
+
+button {
+	background-color: #ee9b52;
+	color: black;
+	font-weight: bold;
+	transition: transform 80ms ease-in;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .absolute {
+    position: absolute;
+    bottom: 20px;
+    padding-left: 8px;
+  }

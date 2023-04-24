@@ -1,0 +1,7 @@
+button {
+	background-color: #ee9b52;
+	color: black;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: transform 70ms ease-in;
+}

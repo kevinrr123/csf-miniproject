@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+	integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<title>Home</title>
+</head>
+<body >
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #dc6c0a; font-weight: bolder;color: aliceblue;">
+		<div class="container-fluid">
+			<a class="navbar-brand" [routerLink]="['/frontpage']"><i class="fa-sharp fa-solid fa-cutlery" style="color: aliceblue;"> Recipes</i></a>
+	
+			<div class="navbar py-0 ">
+				<ul class="navbar-nav" style="font-weight: bold;">
+					<li class="nav-item active" *ngIf="!authenticate" >
+						<!-- Step 4: Close the menu when a link is clicked. -->
+						<button mat-button [routerLink]="['/login']"><i class="fa-sharp fa-solid fa-user" style="font-size:20px"></i><b> Sign In</b></button>
+					</li>
+					<li class="nav-item" *ngIf="authenticate" style="margin-right: 15px;">
+						<form [formGroup]="form" (ngSubmit)="searchbykey()">
+							<div class="input-group">
+							<input type="text" class="form-control border border-dark" id="name" placeholder="Find a Recipe (e.g. cake)" maxlength="100" formControlName="search">
+							<button class="btn btn-info btn-sm" type="submit" ><i class="fa-solid fa-magnifying-glass" style="font-size:14px"></i></button>
+							</div>
+						</form>
+					</li>
+					<li class="nav-item" *ngIf="authenticate" style="margin-right: 10px;">
+						<a class="nav-link " [routerLink]="['/frontpage']" style="color: aliceblue;">Home</a>
+					</li>
+					<li class="nav-item" *ngIf="authenticate" style="margin-right: 10px;">
+						<a class="nav-link" [routerLink]="['/favourites']" style="color: aliceblue;">Favourites</a>
+					</li>
+					<li class="nav-item" *ngIf="authenticate" style="margin-right: 10px;">
+						<a class="nav-link" (click)="random()" style="color: aliceblue;cursor: pointer">Random Recipe</a>
+					</li>
+					<li class="nav-item" style="margin-right: 30px;">
+						<a class="nav-link" [routerLink]="['/contact']" style="color: aliceblue;">About Us</a>
+					</li>
+					<li class="nav-item" *ngIf="authenticate" style="margin-right: 10px;">
+						<button mat-button [matMenuTriggerFor]="fileMenu"><i class="fa-sharp fa-solid fa-user" style="font-size:20px"></i><b style="text-transform: uppercase;"> {{user}}</b></button>
+						<mat-menu #fileMenu="matMenu">
+							<button mat-menu-item (click)="signout()">Log out</button>
+						</mat-menu>
+					</li>
+					
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="full-height">
+		<router-outlet></router-outlet>
+	</div>
+</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</html>

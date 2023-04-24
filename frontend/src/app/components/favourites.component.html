@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div class="center" style="padding-top: 20px;">
+            <h1 ><b style="text-transform: uppercase;">Favourite Recipes</b></h1>
+        </div>
+        <div *ngIf="reIDs.length > 0 ">
+            <mat-card class="card" *ngFor="let a of reIDs;">
+                <img mat-card-image [src]="receipeList[a].imageUrl" (click)="details(receipeList[a])" style="cursor:pointer;">
+                <b style="font-size: medium;">{{ receipeList[a].name }}</b>
+
+                <mat-card-actions class="absolute">
+                    <button class="btn btn-danger btn-sm" (click)="remove(receipeList[a])" type="submit"><i class="fa fa-trash" aria-hidden="true"></i><b> Remove from Favourites</b></button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div *ngIf="reIDs.length == 0" style="margin-left: 50px;margin-top: 50px;">
+            <h1 style="font-weight: bold;">Hi {{this.user}}, Add recipes to your Favourites! </h1>
+        </div>
+    </body>
+</html>

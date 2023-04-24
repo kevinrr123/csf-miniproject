@@ -1,0 +1,19 @@
+button {
+	background-color: #ee9b52;
+	color: black;
+	font-weight: bold;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+textarea {
+    width: 50%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #708c98;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+  }

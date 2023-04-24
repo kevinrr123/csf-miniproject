@@ -1,0 +1,41 @@
+<head>
+</head>
+<body style="margin:55px;">
+    <div *ngIf="reIDs.length > 0 ">
+    
+        <div class="container my-4" style="color: rgb(84, 12, 24); font-weight: bold;" *ngFor="let a of reIDs;">
+            <h1 style="font-weight: bolder;margin-left: 8px;">{{ receipeList[a].name }} </h1>
+             <div class="row mt-4 mx-auto">
+                <div class="col-sm">
+                    <img mat-card-image [src]="receipeList[a].imageUrl" class="img-thumbnail" style="width:400px;height:320px;margin-top: 8px;">
+                </div>
+                <div class="col-sm-8">
+                    <table style="width:70%">
+                        <tr>
+                          <th>Ingredients:</th>
+                          <th>Required Amount:</th>
+                        </tr>
+                        <tr>
+                          <td><li *ngFor="let r of receipeList[a].ingredients"><span>{{r}}</span></td>
+                            <td><li *ngFor="let m of receipeList[a].measures"><span>{{m}}</span></td>
+                        </tr>
+                    </table>
+                </div>
+             </div> 
+             &nbsp;
+            <div class="row mx-auto" style="margin-top: 15px;">
+                <p>Instructions:</p>
+                <p>{{receipeList[a].instructions}}</p>
+                <p>Category: <span>{{receipeList[a].category}}</span></p>        
+                <p>Type of Cuisine: <span>{{receipeList[a].area}}</span></p>
+                <p>Source: <a href="{{receipeList[a].sourceUrl}}" target="_blank">Click Here</a></p> 
+                <div>
+                    <button class="btn btn-dark btn-sm" (click)="addtofav(this.user,receipeList[a].id)">Add to Favourites &nbsp;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="not">
+        <h1 style="font-weight: bolder;">Error. Please try again.</h1>
+    </div>
+</body>

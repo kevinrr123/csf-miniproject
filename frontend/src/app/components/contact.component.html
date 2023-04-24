@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div class="center">
+            <mat-card class="card" style="background-color: #d3ccc5;">
+                <b style="font-size: medium;">We Are New, Please Reach Us At Our Office Location Below</b>
+                &nbsp;
+                <google-map [width]="365" [height]="400" [options]="mapOptions">
+                    <map-marker [position]="marker.position"></map-marker>
+                </google-map>
+                <mat-card-actions class="absolute">
+                    <div class="socil_item_inner d-flex">
+                        <li><a><i class="fab fa-facebook-square"></i></a></li>
+                        <li><a><i class="fab fa-instagram"></i></a></li>
+                        <li><a><i class="fab fa-twitter"></i></a></li>
+                     </div>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </body>
+</html>
+

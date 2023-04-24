@@ -37,7 +37,7 @@ public class RecipeRedis implements RecipeRepo{
         ValueOperations<String,Object> ops = template.opsForValue();
         String value = "";
         if(null == ops.get(key)){
-            value = "ErrorNotFound";
+            value = "Error,Not Found";
         }
         else{
             value = ops.get(key).toString();
@@ -46,12 +46,12 @@ public class RecipeRedis implements RecipeRepo{
     }
 
     @Override
-    public Boolean saveReci(String key2,String value2){
+    public Boolean saveReci(String user,String id){
         ListOperations<String, String> listOps = template2.opsForList();
-        List<String> ValueList = SavedList(key2);
+        List<String> ValueList = SavedList(user);
 
-        if (!ValueList.contains(value2)) {
-            listOps.rightPush(key2, value2);
+        if (!ValueList.contains(id)) {
+            listOps.rightPush(user, id);
             return true;
         } else {
             return false;
@@ -64,9 +64,10 @@ public class RecipeRedis implements RecipeRepo{
     }
 
     @Override
-    public void delete(String key, String value) {
+    public Boolean delete(String key, String value) {
         ListOperations<String, String> listOps2 = template2.opsForList();
-        listOps2.remove(key, 0, value);    
+        Long del = listOps2.remove(key, 0, value);  
+        return del>0;   
     }
 
 }

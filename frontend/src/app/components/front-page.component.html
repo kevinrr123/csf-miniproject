@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    </head>
+    <body>
+        <div id="htmlData">
+            <div class="row col-md-6 col-md-offset-2 custyle" *ngIf="cIDs.length > 0" class="center">
+                <table class="table table-hover table-borderless custab" style="width: 70%;" >
+                    <thead style="background-color: #e8a079;">
+                        <tr>
+                            <th style="width: 25% ">Recipe Name</th>
+                            <th style="width: 40%">Comment(s)</th>
+                            <th style="width: 15%">Date Tried</th>
+                            <th style="width: 10%" class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <tr *ngFor="let a of cIDs;" class="table-light">
+                            <td><p class="fw-normal mb-1"><span>{{commentList[a].recipename}}</span></p></td>
+                            <td><p class="fw-normal mb-1"><span>{{commentList[a].comments}}</span></p></td>
+                            <td><p class="fw-normal mb-1"><span>{{commentList[a].date}}</span></p></td>
+                            <td class="text-center">
+                                <button class="btn btn-secondary btn-sm btn-rounded" style="margin-right: 20px;" (click)="edit(commentList[a])"><i class="fa fa-edit" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger btn-sm btn-rounded" (click)="removeOne(commentList[a])"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="center" style="margin-left: 64%;" *ngIf="cIDs.length > 0">
+                <button class="btn btn-info" (click)="downloadAsPDF();">Email me</button>
+            </div>
+        </div>
+        <div *ngIf="cIDs.length == 0&&auth" style="margin-left: 50px;margin-top: 50px;">
+            <h1 style="font-family: sans-serif;font-weight: bold;"> Welcome Back, {{user}}! Search and try some Recipes! </h1>
+        </div>
+    </body>
+</html>
+
+
+
+

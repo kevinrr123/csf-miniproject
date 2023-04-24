@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Bootstrap JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+</head>
+	<body >
+		<div class="container" id="container" [ngClass]="{'right-panel-active' : displayregAccount == true}">
+			<div class="form-container sign-up-container">
+				<form [formGroup]="registerForm" (ngSubmit)="register()">
+					<h1>Sign Up</h1>&nbsp;
+					<input type="text" formControlName="username" placeholder="Username" required>
+					<input type="email" placeholder="Email" formControlName="email" required/>
+					<input type="password" placeholder="Password" formControlName="password" required/>
+					&nbsp;
+					<button type="submit" [disabled]="registerForm.invalid">Sign Up</button>
+				</form>
+			</div>
+			<div class="form-container sign-in-container">
+				<form [formGroup]="loginForm" (ngSubmit)="login()">
+					<h1>Log In</h1>&nbsp;
+					<input type="text" placeholder="Username" formControlName="username"/>
+					<input type="password" placeholder="Password" formControlName="password"/>
+					&nbsp;
+					<button type="submit" [disabled]="loginForm.invalid" >Log In</button>
+				</form>
+			</div>
+			<div class="overlay-container">
+				<div class="overlay">
+					<div class="overlay-panel overlay-left">
+						<h1>Welcome Back!</h1>
+						<p>Log in now to get started!</p>
+						<button class="ghost" id="signIn" (click)="flipPage()">Log In</button>
+					</div>
+					<div class="overlay-panel overlay-right" >
+						<img src="../../assets/logo.jpg" alt="" class="logo">
+						<h1>eRecipes</h1>
+						<p>Sign up now!</p>
+						<button class="ghost" id="signUp" (click)="flipPage()">Sign Up</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

@@ -8,7 +8,7 @@ public interface RecipeRepo {
     
     public Boolean saveReci(String key, String value);
 
-    public void delete(String key, String value);
+    public Boolean delete(String key, String value);
     
 }
 

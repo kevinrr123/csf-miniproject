@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+    background: linear-gradient(to right, rgb(246, 233, 237), rgb(241, 221, 188));
+    background-size: cover; 
+    font-family: 'Times New Roman', serif;
+    margin-bottom: 8px;  
+}
+
+.green-snackbar {
+    background: rgb(6, 153, 6);
+    color: white;
+}
+.green-snackbar button {
+    /* background-color: green; */
+    color: white;
+    border: none;
+}
+.red-snackbar {
+    background: rgb(180, 5, 5);
+    color: white;
+}
+.red-snackbar button {
+    /* background-color: rgb(118, 14, 14); */
+    color: white !important;
+    border: none;
+}
+
