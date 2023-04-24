@@ -54,8 +54,9 @@ public class EmailService {
 
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setFrom("");
+        helper.setFrom("noreply@baeldung.com");
         helper.setTo(email);
+        //System.out.println(email);
         helper.setSubject("Tried Recipes");
         helper.setText("Hi, please find the list you've requested.");
 

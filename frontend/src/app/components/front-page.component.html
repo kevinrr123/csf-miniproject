@@ -27,8 +27,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="center" style="margin-left: 64%;" *ngIf="cIDs.length > 0">
-                <button class="btn btn-info" (click)="downloadAsPDF();">Email me</button>
+            <div class="center" style="margin-left: 63%;" *ngIf="cIDs.length > 0">
+                <button class="btn btn-info" type="button" (click)="downloadAsPDF();" style="color: aliceblue;font-weight: bold;"><i class="fa fa-envelope" aria-hidden="true"></i> Email me</button>
             </div>
         </div>
         <div *ngIf="cIDs.length == 0&&auth" style="margin-left: 50px;margin-top: 50px;">
