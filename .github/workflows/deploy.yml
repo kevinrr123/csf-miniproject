@@ -25,7 +25,7 @@ jobs:
         run: npm run build:prod
       - name: Copy Angular files to Spring Boot static directory
         run: |
-          cp ./dist/*  ../src/main/resources/static
+          cp ./dist/*  ./src/main/resources/static
 
   deploy:
     needs: build
@@ -35,10 +35,10 @@ jobs:
     #     working-directory: ./
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
+      # - name: Use Node
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
       - name: Install Railway
         run: npm i -g @railway/cli@2.1.0
       - name: Deploy
